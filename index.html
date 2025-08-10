@@ -1,245 +1,402 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Horizon Behavioral Solutions</title>
-  <style>
-    /* ===== Global Styles ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f8f9fc;
-      color: #333;
-      line-height: 1.6;
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    h1, h2, h3 {
-      color: #222;
-    }
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: auto;
-    }
-    header {
-      background: linear-gradient(90deg, #6a11cb, #2575fc);
-      padding: 15px 0;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav ul {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-    }
-    nav ul li a {
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    nav ul li a:hover {
-      color: #ffde59;
-    }
-    /* ===== Hero Section ===== */
-    .hero {
-      background: url('https://images.unsplash.com/photo-1521790361543-f645cf042ec4') center/cover no-repeat;
-      color: white;
-      padding: 120px 20px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
-    .btn {
-      background: #ffde59;
-      color: #333;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background: #ffcc00;
-    }
-    /* ===== Sections ===== */
-    section {
-      padding: 60px 0;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: transform 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    /* ===== Contact Form ===== */
-    form {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    form input, form select, form textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    form button {
-      background: #6a11cb;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    form button:hover {
-      background: #2575fc;
-    }
-    /* ===== Footer ===== */
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 15px 0;
-    }
-    /* ===== Responsive ===== */
-    @media(max-width: 768px) {
-      nav ul {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+  <meta name="description" content="Evidence-based early intervention & behavioral services for children (18 months - 12 years). Outcome-focused, family-led." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!--
+    Instructions:
+    - To use EmailJS: sign up at https://www.emailjs.com/, create a service and template, then replace EMAILJS_USER_ID, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID below in the script.
+    - To use Formspree: sign up at https://formspree.io/, create a form endpoint, then set FORMSPREE_ENDPOINT variable in the script to your endpoint URL.
+    - To use server-side: implement /api/contact POST endpoint (sample server.js with nodemailer provided earlier).
+  -->
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <nav>
-      <h2>Horizon Behavioral Solutions</h2>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#parent">Parent Training</a></li>
-        <li><a href="#consult">Consultancy</a></li>
-        <li><a href="#contact">Contact</a></li>
+  <!-- NAV -->
+  <header class="site-header">
+    <div class="container header-grid">
+      <div class="brand">
+        <div class="logo">H</div>
+        <div class="brand-text">
+          <div class="title">Horizon Behavioral Solutions</div>
+          <div class="subtitle">Outcome-focused • Family-led</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#parent-training">Parent Training</a>
+        <a href="#consultancy">Consultancy</a>
+        <a href="#contact" class="book-btn">Book a Free Call</a>
+      </nav>
+
+      <button class="mobile-menu-btn" id="mobileToggle" aria-expanded="false">☰</button>
+    </div>
+
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#parent-training">Parent Training</a>
+      <a href="#consultancy">Consultancy</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero container">
+      <div class="hero-left">
+        <span class="eyebrow">Evidence-based • Child-centered</span>
+        <h1>Personalised early intervention & behavioural services for children (18 months – 12 years)</h1>
+        <p class="lead">We put your child at the center. Outcome-focused programs, family-led support, and skilled clinicians dedicated to helping every child reach their potential.</p>
+
+        <div class="hero-features">
+          <div class="pill">Individualized Assessments</div>
+          <div class="pill">Family-Focused Coaching</div>
+          <div class="pill">School & IEP Support</div>
+          <div class="pill">Home & Community Delivery</div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn primary">Schedule a Call</a>
+          <a href="#services" class="muted">See Services →</a>
+        </div>
+      </div>
+
+      <aside class="booking-card card hero-right" aria-labelledby="bookingTitle">
+        <div id="bookingTitle" class="card-head">
+          <h3>Book your FREE 15-minute consultation</h3>
+          <p class="meta">Quick phone consultation to understand needs & next steps.</p>
+        </div>
+
+        <form id="contactForm" class="form" novalidate>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Your full name" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+          </div>
+
+          <div class="row">
+            <div class="field flex">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="+61 4xx xxx xxx" required>
+            </div>
+
+            <div class="field" style="min-width:170px">
+              <label for="service">Service</label>
+              <select id="service" name="service" required>
+                <option value="Behavioral Parent Training">Behavioral Parent Training (Online & In Person)</option>
+                <option value="Consultancy Service Model">Consultancy Service Model</option>
+                <option value="Early Intensive Behavioral Intervention">Early Intensive Behavioral Intervention</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="datetime">Preferred date & time</label>
+            <input id="datetime" name="datetime" type="datetime-local" required>
+            <div class="hint">Please select a date and time after the current date.</div>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your child or the support you're looking for" rows="4"></textarea>
+          </div>
+
+          <div class="consent-row">
+            <input id="consent" name="consent" type="checkbox" required>
+            <label for="consent" class="consent-label">I consent to Horizon Behavioral Solutions contacting me about services.</label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary fullwidth">Request Consultation</button>
+            <div class="call-meta">Or call: <a href="tel:+61421085629">+61 421 085 629</a></div>
+          </div>
+
+          <div id="formStatus" class="form-status" aria-live="polite"></div>
+        </form>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="container section">
+      <div class="two-col">
+        <div>
+          <h2>About Us</h2>
+          <p>Horizon Behavioral Solutions' mission is to provide effective behavioral solutions using evidence-based early intervention techniques for children aged 18 months - 12 years with different behavioral and developmental disabilities.</p>
+
+          <p>Knowing that a truly personalized approach will offer more successful results, we put your child at the center of everything we do. From individualized skills and behavior assessments to a wide range of robust early intervention therapeutic programs, we work hard to cultivate every individual’s highest potential. We work extensively not just with your child, but with parents as well. This enables the family to benefit from our services across different environments.</p>
+
+          <p>Our goal is to provide services that are outcome-focused and family-led.</p>
+        </div>
+
+        <div class="card contact-card">
+          <h4>Contact</h4>
+          <p><strong>Call:</strong> +61 421 085 629</p>
+          <p><strong>Email:</strong> <a href="mailto:sarah@horizonbehavioralsolutions.com">sarah@horizonbehavioralsolutions.com</a></p>
+          <p class="small">We provide services for NDIS self-managed and plan-managed families, and offer fee-for-service for private payers. We prepare progress reports for NDIS reviews.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="container section">
+      <h2>Our Services</h2>
+      <div class="services-grid">
+        <article class="service card">
+          <h3>Behavioral Parent Training (Online & In Person)</h3>
+          <p>As a caregiver, you are your child's greatest advocate. Our parent training is a partnership that customizes strategies to your family's needs, strengthening the bond while improving behaviour. We offer a 10-week capacity building program tailored to family goals and practical tools for everyday life.</p>
+        </article>
+
+        <article class="service card">
+          <h3>Consultancy Service Model</h3>
+          <p>Consultancy could entail everything from setting up your child’s initial program, to assisting with IEPs, school observations, and therapist training. Services include school observations/consultation, IEP meetings and goal preparation, assessments, and training independent therapists/support workers. Frequency is agreed between clinician and family.</p>
+        </article>
+
+        <article class="service card">
+          <h3>Early Intensive Behavioral Intervention Program</h3>
+          <p>Our core service is an individualized therapy program delivered in natural learning environments — home, childcare and school. Sessions are developed through consultation with parents and other providers, and through observation and assessment of the child. Children are supported to develop new skills in a nurturing, playful, strength-based environment that honours the child’s interests.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PARENT TRAINING DETAILS -->
+    <section id="parent-training" class="container section">
+      <h2>Why Behavioral Parent Training is Important</h2>
+      <p>As a caregiver, you naturally spend the most time with your child, making you their greatest advocate. We need you, their greatest advocate, on their care team. Customized to fit the needs of your family, parent training is more than a program; it’s a partnership aimed at unlocking your child’s potential. Utilizing evidence-based strategies in your everyday life not only brings about behavioral improvements in your child but also strengthens the emotional bond between you and your child.</p>
+
+      <h3>What is HBS Parent Training Program?</h3>
+      <p>We offer a 10-week capacity building parent training program that empowers parents with the tools and strategies they need to transform their lives and create meaningful, lasting change in their child’s life. The goal of the 10-weeks Behavioral Parent training Program is to provide support that is individualized to the goals of the family and helps the child progress in multiple developmental domains – social, pre-academic, behavioral, language.</p>
+
+      <h3>What to Expect in the Sessions</h3>
+      <ul class="expect-list">
+        <li>Why the child engages in the challenging behaviour — identifying the “WHY”.</li>
+        <li>Controlling emotions vs effectively managing behavior.</li>
+        <li>How to predict and prevent challenging behaviors.</li>
+        <li>How to respond to challenging behaviors.</li>
+        <li>How to improve or develop effective communication or language using Functional Communication Training.</li>
+        <li>How to teach new skills using evidence-based techniques e.g. Toilet training, Daily living skills, Social skills etc.</li>
+        <li>How to maintain positive change over time.</li>
       </ul>
-    </nav>
-  </div>
-</header>
+    </section>
 
-<!-- Hero -->
-<section class="hero">
-  <h1>Helping Children Thrive</h1>
-  <p>Professional child behavioral therapy, parent training, and consultancy services.</p>
-  <a href="#contact" class="btn">Book a Consultation</a>
-</section>
+    <!-- CONSULTANCY DETAILS -->
+    <section id="consultancy" class="container section">
+      <h2>Consultancy — Practical, Individualized Support</h2>
+      <p>Consultancy can include setting up your child’s initial program, assisting with IEPs, supporting school observations, assessments and training independent therapists/support staff. The frequency of consultation depends on a mutually agreed number of hours between clinician and the family.</p>
 
-<!-- About -->
-<section id="about" class="container">
-  <h2>About Us</h2>
-  <p>At Horizon Behavioral Solutions, we provide compassionate, evidence-based behavioral therapy for children, along with training for parents and consultancy for schools and organizations.</p>
-</section>
+      <h3>How to access our services</h3>
+      <p>If you have a current NDIS plan, we can provide services to NDIS self-managed and plan-managed families, including writing progress reports for NDIS reviews. If you don't have NDIS funding, we offer “Fee for Service” arrangements for private payers.</p>
 
-<!-- Services -->
-<section id="services" class="container">
-  <h2>Our Services</h2>
-  <div class="services-grid">
-    <div class="card">
-      <h3>Behavioral Therapy</h3>
-      <p>Individualized plans to help children develop positive behaviors and coping strategies.</p>
+      <h3>To discuss further</h3>
+      <ol>
+        <li>Schedule a free initial telephone consultation.</li>
+        <li>Know what services you need.</li>
+        <li>Find out about the cost.</li>
+      </ol>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="brand-mini">
+        <div class="logo small">H</div>
+        <div>
+          <strong>Horizon Behavioral Solutions</strong>
+          <div class="small">Outcome-focused • Family-led</div>
+        </div>
+      </div>
+
+      <div class="footer-contact">
+        <div><strong>Call:</strong> +61 421 085 629</div>
+        <div><strong>Email:</strong> <a href="mailto:sarah@horizonbehavioralsolutions.com">sarah@horizonbehavioralsolutions.com</a></div>
+      </div>
+
+      <div class="copyright">© <span id="year"></span> Horizon Behavioral Solutions — All rights reserved</div>
     </div>
-    <div class="card">
-      <h3>Parent Training</h3>
-      <p>Guiding parents in effective strategies to support their child's development.</p>
-    </div>
-    <div class="card">
-      <h3>School Consultancy</h3>
-      <p>Partnering with schools to create supportive environments for students with behavioral needs.</p>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<!-- Parent Training -->
-<section id="parent" class="container">
-  <h2>Parent Training Programs</h2>
-  <p>Empowering parents with skills and confidence to help their children succeed at home and in school.</p>
-</section>
+  <!-- TOAST -->
+  <div id="toast" class="toast">Message sent — we'll be in touch shortly.</div>
 
-<!-- Consultancy -->
-<section id="consult" class="container">
-  <h2>Consultancy</h2>
-  <p>We offer tailored consultancy for educational institutions and organizations looking to improve behavioral support systems.</p>
-</section>
+  <!-- SCRIPTS -->
+  <script>
+    // --- Small utilities & UI behavior ---
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-<!-- Contact -->
-<section id="contact" class="container">
-  <h2>Book a Consultation</h2>
-  <form id="contactForm">
-    <input type="text" name="name" placeholder="Full Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="tel" name="phone" placeholder="Phone Number">
-    <select name="service" required>
-      <option value="">Select a Service</option>
-      <option>Behavioral Therapy</option>
-      <option>Parent Training</option>
-      <option>School Consultancy</option>
-    </select>
-    <input type="date" name="date" required>
-    <input type="time" name="time" required>
-    <textarea name="message" placeholder="Your Message" rows="4"></textarea>
-    <label><input type="checkbox" required> I consent to be contacted.</label>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileToggle.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      mobileToggle.setAttribute('aria-expanded', String(!open));
+    });
 
-<footer>
-  <p>&copy; 2025 Horizon Behavioral Solutions. All Rights Reserved.</p>
-</footer>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if (href.length > 1) {
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (window.innerWidth < 800) mobileMenu.style.display = 'none';
+        }
+      });
+    });
 
-<script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
-<script>
-  (function(){
-    emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your EmailJS user ID
-  })();
+    // set min date/time for datetime-local to now + 30min
+    function setMinDateTime() {
+      const dt = document.getElementById('datetime');
+      if (!dt) return;
+      const now = new Date(Date.now() + 30 * 60 * 1000);
+      const tzOffset = now.getTimezoneOffset() * 60000;
+      const localISO = new Date(now - tzOffset).toISOString().slice(0,16);
+      dt.min = localISO;
+    }
+    setMinDateTime();
 
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-      .then(() => alert('Message sent successfully!'))
-      .catch(() => alert('Failed to send message.'));
-  });
-</script>
+    // --- Contact form handling: EmailJS (default) with fallback to server POST ---
+    const form = document.getElementById('contactForm');
+    const toast = document.getElementById('toast');
+    const statusEl = document.getElementById('formStatus');
 
+    // CONFIG: replace these placeholders
+    const EMAILJS_USER_ID = 'EMAILJS_USER_ID';     // <-- replace with your EmailJS user id (public key)
+    const EMAILJS_SERVICE_ID = 'EMAILJS_SERVICE_ID'; // <-- replace with your EmailJS service id
+    const EMAILJS_TEMPLATE_ID = 'EMAILJS_TEMPLATE_ID'; // <-- replace with your EmailJS template id
+
+    const USE_EMAILJS = true; // set to false to skip EmailJS and POST to server instead
+    const SERVER_POST_URL = '/api/contact'; // change to full URL if server hosted elsewhere
+    const FORMSPREE_ENDPOINT = ''; // optionally set to https://formspree.io/f/xxxxx
+
+    // Helper: show success
+    function showSuccess(msg) {
+      statusEl.style.color = '#00c2a8';
+      statusEl.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 4000);
+      form.reset();
+      setMinDateTime();
+    }
+
+    // POST to server fallback
+    async function postToServer(data) {
+      try {
+        const res = await fetch(SERVER_POST_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          showSuccess('Thanks! Your request has been sent. We will contact you soon.');
+        } else {
+          const text = await res.text();
+          statusEl.textContent = 'Failed to send: ' + text;
+        }
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Unable to send form (server). Try emailing sarah@horizonbehavioralsolutions.com';
+      }
+    }
+
+    // Use Formspree alternative (uncomment if you want to use Formspree directly)
+    async function postToFormspree(formEl) {
+      const endpoint = FORMSPREE_ENDPOINT; // set this to your formspree url
+      if (!endpoint) {
+        statusEl.textContent = 'Formspree endpoint not set.';
+        return;
+      }
+      const fd = new FormData(formEl);
+      try {
+        const res = await fetch(endpoint, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' }});
+        if (res.ok) {
+          showSuccess('Thanks! Your request has been sent. We will contact you soon.');
+        } else {
+          statusEl.textContent = 'Formspree failed to send.';
+        }
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Formspree error.';
+      }
+    }
+
+    // Main submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      statusEl.style.color = '';
+      statusEl.textContent = 'Sending...';
+
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        service: form.service.value,
+        datetime: form.datetime.value,
+        message: form.message.value.trim()
+      };
+
+      // If you want to use Formspree, call postToFormspree(form) here and return.
+
+      if (USE_EMAILJS) {
+        // dynamically load EmailJS if needed
+        try {
+          if (!window.emailjs) {
+            await new Promise((resolve, reject) => {
+              const s = document.createElement('script');
+              s.src = 'https://cdn.emailjs.com/sdk/3.2.0/email.min.js';
+              s.onload = resolve;
+              s.onerror = reject;
+              document.head.appendChild(s);
+            });
+          }
+          // initialize - replace placeholder above with your user id
+          if (window.emailjs && EMAILJS_USER_ID && EMAILJS_USER_ID !== 'EMAILJS_USER_ID') {
+            window.emailjs.init(EMAILJS_USER_ID);
+          } else {
+            console.warn('EmailJS not initialized: set EMAILJS_USER_ID in script.');
+          }
+
+          // prepare template params (ensure your template uses these fields)
+          const templateParams = {
+            from_name: data.name,
+            from_email: data.email,
+            phone: data.phone,
+            service_requested: data.service,
+            preferred_datetime: data.datetime,
+            message: data.message,
+            site: 'Horizon Behavioral Solutions'
+          };
+
+          if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || EMAILJS_SERVICE_ID === 'EMAILJS_SERVICE_ID') {
+            // EmailJS IDs not set -> fallback
+            throw new Error('EmailJS IDs not set');
+          }
+
+          const res = await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+          console.log('EmailJS response', res);
+          showSuccess('Thanks! Your request has been sent. We will contact you soon.');
+        } catch (err) {
+          console.warn('EmailJS failed, falling back to server POST.', err);
+          // fallback to server
+          await postToServer(data);
+        }
+      } else {
+        // direct server POST
+        await postToServer(data);
+      }
+    });
+  </script>
 </body>
 </html>
