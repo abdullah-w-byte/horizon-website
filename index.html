@@ -1,400 +1,677 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Horizon Behavioral Solutions</title>
-  <meta name="description" content="Evidence-based early intervention & behavioral services for children (18 months - 12 years). Outcome-focused, family-led." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <!--
-    Instructions:
-    - To use EmailJS: sign up at https://www.emailjs.com/, create a service and template, then replace EMAILJS_USER_ID, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID below in the script.
-    - To use Formspree: sign up at https://formspree.io/, create a form endpoint, then set FORMSPREE_ENDPOINT variable in the script to your endpoint URL.
-    - To use server-side: implement /api/contact POST endpoint (sample server.js with nodemailer provided earlier).
-  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LedgerCall AI — Voice Agents for Accounting Firms</title>
+  <meta name="description" content="AI voice calling agents that qualify leads, book consults, and chase invoices for accounting firms. 24/7, secure, and integrated with your stack."/>
+  <meta property="og:title" content="LedgerCall AI — Voice Agents for Accounting Firms"/>
+  <meta property="og:description" content="AI voice calling agents that qualify leads, book consults, and chase invoices for accounting firms."/>
+  <meta property="og:type" content="website"/>
+  <meta name="theme-color" content="#7c3aed" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0a0a0f;
+      --bg-2: #0e0e15;
+      --card: #12121b;
+      --muted: #9ca3af;
+      --text: #ffffff;
+      --brand: #8b5cf6; /* purple-500 */
+      --brand-2: #7c3aed; /* purple-600 */
+      --brand-3: #a78bfa; /* purple-300 */
+      --success: #34d399;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --glow: 0 0 40px rgba(124,58,237,.25), 0 0 120px rgba(124,58,237,.15);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;scroll-behavior:smooth}
+    body{
+      margin:0;color:var(--text);background:radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.25), transparent 60%),
+      radial-gradient(800px 400px at 95% 10%, rgba(167,139,250,.18), transparent 60%),
+      linear-gradient(180deg,var(--bg),var(--bg-2));
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.2rem;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));backdrop-filter:blur(6px);color:#fff;text-decoration:none;font-weight:600;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--glow);border-color:rgba(167,139,250,.35)}
+    .btn-primary{background:linear-gradient(180deg, var(--brand-3), var(--brand-2));color:#fff;border-color:transparent}
+    .btn-ghost{background:transparent;border-color:rgba(255,255,255,.12)}
+    .badge{display:inline-flex;gap:.5rem;align-items:center;padding:.35rem .6rem;border-radius:999px;background:rgba(124,58,237,.12);color:var(--brand-3);border:1px solid rgba(124,58,237,.25);font-weight:600;font-size:.85rem}
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(10,10,15,.9), rgba(10,10,15,.6) 40%, rgba(10,10,15,0));backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    .logo{display:flex;align-items:center;gap:.75rem;font-weight:800;letter-spacing:.3px}
+    .logo-mark{width:34px;height:34px;border-radius:10px;background:radial-gradient(circle at 30% 30%, #fff 0, #e9d5ff 8%, #a78bfa 28%, #7c3aed 70%, #4c1d95 100%);box-shadow:0 0 40px rgba(124,58,237,.45) inset, 0 8px 40px rgba(124,58,237,.35)}
+    .nav a{color:#fff;text-decoration:none;margin:0 10px;font-weight:600;opacity:.9}
+    .nav a:hover{opacity:1}
+    .mobile-toggle{display:none}
+
+    /* Hero */
+    .hero{position:relative;padding:100px 0 60px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+    h1{font-family:"Space Grotesk",Inter,system-ui,sans-serif;font-size:clamp(36px,7vw,64px);line-height:1.05;margin:18px 0}
+    .lead{font-size:1.125rem;color:#d1d5db;max-width:58ch}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+    .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+    .stat{padding:16px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border-radius:16px}
+    .stat b{font-size:1.4rem}
+
+    /* Alchemist Illustration */
+    .alchemy{position:relative;aspect-ratio:1/1;border-radius:24px;background:radial-gradient(150px 150px at 70% 30%, rgba(167,139,250,.35), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);box-shadow:0 10px 60px rgba(124,58,237,.25);}
+    .alchemy svg{width:100%;height:100%;display:block;filter:drop-shadow(0 10px 40px rgba(124,58,237,.35))}
+
+    /* Sections */
+    section{padding:80px 0}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+    .kicker{letter-spacing:.2em;text-transform:uppercase;color:var(--brand-3);font-weight:800;font-size:.8rem}
+    h2{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(28px,4vw,42px);margin:10px 0}
+    .sub{color:#c7c9d1;max-width:65ch}
+
+    .grid{display:grid;gap:18px}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+
+    .card{position:relative;padding:20px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease}
+    .card:hover{transform:translateY(-4px);border-color:rgba(167,139,250,.35);box-shadow:var(--glow)}
+    .card h3{margin:8px 0 6px;font-size:1.1rem}
+    .muted{color:#c7c9d1}
+
+    .icon{width:42px;height:42px;border-radius:12px;display:inline-grid;place-items:center;background:linear-gradient(180deg,var(--brand-3),var(--brand-2));box-shadow:0 6px 30px rgba(124,58,237,.35);}
+    .icon svg{width:22px;height:22px;fill:#fff}
+
+    .steps{counter-reset:step}
+    .step{display:flex;gap:16px;align-items:flex-start;padding:16px;border-radius:16px;border:1px dashed rgba(255,255,255,.12)}
+    .step:before{counter-increment:step;content:counter(step);display:grid;place-items:center;min-width:36px;height:36px;border-radius:10px;background:rgba(124,58,237,.15);border:1px solid rgba(167,139,250,.35);color:var(--brand-3);font-weight:800}
+
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+    .price-card{padding:24px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01))}
+    .price-tag{font-size:2rem;font-weight:800}
+    .list{list-style:none;padding:0;margin:14px 0;display:grid;gap:10px}
+    .list li{display:flex;gap:10px;align-items:flex-start}
+    .list .check{margin-top:3px}
+
+    /* Testimonials slider */
+    .slider{position:relative;overflow:hidden}
+    .slides{display:flex;gap:16px;transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+    .slide{min-width:calc(33.333% - 11px)}
+    .slide .card{height:100%}
+    .slider-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.2);cursor:pointer}
+    .dot.active{background:var(--brand-2)}
+
+    /* Contact */
+    form{display:grid;gap:12px}
+    input, textarea, select{width:100%;padding:14px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.02);color:#fff}
+    textarea{min-height:120px;resize:vertical}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-foot{display:flex;align-items:center;gap:12px;justify-content:space-between}
+    .hint{color:#a1a1aa;font-size:.9rem}
+    .success{color:var(--success)}
+    .error{color:var(--danger)}
+
+    /* Footer */
+    footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.06);color:#c7c9d1}
+    .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:20px}
+    .foot a{color:#c7c9d1;text-decoration:none}
+    .foot a:hover{color:#fff}
+
+    /* Cursor ring */
+    .cursor{position:fixed;top:0;left:0;width:36px;height:36px;border-radius:50%;border:1px solid rgba(167,139,250,.45);pointer-events:none;transform:translate(-50%, -50%);mix-blend-mode:screen;z-index:1000;transition:width .2s,height .2s,opacity .2s,border-color .2s}
+    .cursor-dot{position:fixed;top:0;left:0;width:6px;height:6px;border-radius:50%;background:var(--brand-3);pointer-events:none;transform:translate(-50%, -50%);z-index:1000}
+    [data-hover]{transition:transform .2s ease}
+    [data-hover]:hover{transform:translateY(-2px)}
+
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1;transform:none}
+
+    /* Progress bar */
+    .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--brand-3),var(--brand-2));width:0;z-index:999}
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .hero-grid{grid-template-columns:1fr}
+      .stat-row{grid-template-columns:1fr;gap:10px}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+      .grid-4{grid-template-columns:repeat(2,1fr)}
+      .pricing{grid-template-columns:1fr}
+      .slide{min-width:calc(50% - 8px)}
+      .foot-grid{grid-template-columns:1fr 1fr}
+      .form-row{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .grid-3{grid-template-columns:1fr}
+      .grid-4{grid-template-columns:1fr}
+      .slide{min-width:100%}
+      .nav .desktop{display:none}
+      .mobile-toggle{display:inline-flex}
+    }
+  </style>
 </head>
 <body>
+  <div class="progress" id="progress"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
 
-  <!-- NAV -->
-  <header class="site-header">
-    <div class="container header-grid">
-      <div class="brand">
-        <div class="logo">H</div>
-        <div class="brand-text">
-          <div class="title">Horizon Behavioral Solutions</div>
-          <div class="subtitle">Outcome-focused • Family-led</div>
-        </div>
-      </div>
-
-      <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#parent-training">Parent Training</a>
-        <a href="#consultancy">Consultancy</a>
-        <a href="#contact" class="book-btn">Book a Free Call</a>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="logo" aria-label="LedgerCall AI home" data-hover>
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span>LedgerCall <span style="color:var(--brand-3)">AI</span></span>
+      </a>
+      <nav class="desktop" aria-label="Primary">
+        <a href="#features" data-hover>Features</a>
+        <a href="#how" data-hover>How it works</a>
+        <a href="#integrations" data-hover>Integrations</a>
+        <a href="#pricing" data-hover>Pricing</a>
+        <a href="#testimonials" data-hover>Results</a>
+        <a href="#contact" class="btn btn-primary" data-hover>Book a Demo</a>
       </nav>
-
-      <button class="mobile-menu-btn" id="mobileToggle" aria-expanded="false">☰</button>
+      <button class="mobile-toggle btn btn-ghost" id="mobileToggle" aria-controls="mobileMenu" aria-expanded="false">Menu</button>
     </div>
-
-    <div id="mobileMenu" class="mobile-menu">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#parent-training">Parent Training</a>
-      <a href="#consultancy">Consultancy</a>
-      <a href="#contact">Contact</a>
+    <div class="container" id="mobileMenu" hidden>
+      <nav style="display:grid;gap:8px;padding-bottom:12px" aria-label="Mobile">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#testimonials">Results</a>
+        <a href="#contact" class="btn btn-primary" style="width:max-content">Book a Demo</a>
+      </nav>
     </div>
   </header>
 
-  <!-- HERO -->
-  <main>
+  <main id="top">
     <section class="hero container">
-      <div class="hero-left">
-        <span class="eyebrow">Evidence-based • Child-centered</span>
-        <h1>Personalised early intervention & behavioural services for children (18 months – 12 years)</h1>
-        <p class="lead">We put your child at the center. Outcome-focused programs, family-led support, and skilled clinicians dedicated to helping every child reach their potential.</p>
-
-        <div class="hero-features">
-          <div class="pill">Individualized Assessments</div>
-          <div class="pill">Family-Focused Coaching</div>
-          <div class="pill">School & IEP Support</div>
-          <div class="pill">Home & Community Delivery</div>
-        </div>
-
-        <div class="hero-actions">
-          <a href="#contact" class="btn primary">Schedule a Call</a>
-          <a href="#services" class="muted">See Services →</a>
-        </div>
-      </div>
-
-      <aside class="booking-card card hero-right" aria-labelledby="bookingTitle">
-        <div id="bookingTitle" class="card-head">
-          <h3>Book your FREE 15-minute consultation</h3>
-          <p class="meta">Quick phone consultation to understand needs & next steps.</p>
-        </div>
-
-        <form id="contactForm" class="form" novalidate>
-          <div class="field">
-            <label for="name">Full name</label>
-            <input id="name" name="name" type="text" placeholder="Your full name" required>
-          </div>
-
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required>
-          </div>
-
-          <div class="row">
-            <div class="field flex">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" placeholder="+61 4xx xxx xxx" required>
-            </div>
-
-            <div class="field" style="min-width:170px">
-              <label for="service">Service</label>
-              <select id="service" name="service" required>
-                <option value="Behavioral Parent Training">Behavioral Parent Training (Online & In Person)</option>
-                <option value="Consultancy Service Model">Consultancy Service Model</option>
-                <option value="Early Intensive Behavioral Intervention">Early Intensive Behavioral Intervention</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="datetime">Preferred date & time</label>
-            <input id="datetime" name="datetime" type="datetime-local" required>
-            <div class="hint">Please select a date and time after the current date.</div>
-          </div>
-
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your child or the support you're looking for" rows="4"></textarea>
-          </div>
-
-          <div class="consent-row">
-            <input id="consent" name="consent" type="checkbox" required>
-            <label for="consent" class="consent-label">I consent to Horizon Behavioral Solutions contacting me about services.</label>
-          </div>
-
-          <div class="form-actions">
-            <button type="submit" class="btn primary fullwidth">Request Consultation</button>
-            <div class="call-meta">Or call: <a href="tel:+61421085629">+61 421 085 629</a></div>
-          </div>
-
-          <div id="formStatus" class="form-status" aria-live="polite"></div>
-        </form>
-      </aside>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="container section">
-      <div class="two-col">
+      <div class="hero-grid">
         <div>
-          <h2>About Us</h2>
-          <p>Horizon Behavioral Solutions' mission is to provide effective behavioral solutions using evidence-based early intervention techniques for children aged 18 months - 12 years with different behavioral and developmental disabilities.</p>
-
-          <p>Knowing that a truly personalized approach will offer more successful results, we put your child at the center of everything we do. From individualized skills and behavior assessments to a wide range of robust early intervention therapeutic programs, we work hard to cultivate every individual’s highest potential. We work extensively not just with your child, but with parents as well. This enables the family to benefit from our services across different environments.</p>
-
-          <p>Our goal is to provide services that are outcome-focused and family-led.</p>
+          <span class="badge" aria-label="Trusted by firms on three continents">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-7z" fill="currentColor"/></svg>
+            Built for Accounting Firms
+          </span>
+          <h1>AI Voice Agents that <span style="color:var(--brand-3)">qualify leads</span>, <span style="color:var(--brand-3)">book consults</span> & <span style="color:var(--brand-3)">chase invoices</span> — 24/7</h1>
+          <p class="lead">Turn missed calls into booked meetings, speed up AR collections, and deliver white‑glove phone support without adding headcount. Secure, accurate, and tailored to your workflows.</p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary" data-hover>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+              Book a Live Demo
+            </a>
+            <a href="#pricing" class="btn btn-ghost" data-hover>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+              See Pricing
+            </a>
+          </div>
+          <div class="stat-row">
+            <div class="stat reveal"><div class="muted">Avg. response time</div><b>0.6s</b></div>
+            <div class="stat reveal"><div class="muted">First‑call booking rate</div><b>35–52%</b></div>
+            <div class="stat reveal"><div class="muted">Coverage</div><b>24/7/365</b></div>
+          </div>
         </div>
-
-        <div class="card contact-card">
-          <h4>Contact</h4>
-          <p><strong>Call:</strong> +61 421 085 629</p>
-          <p><strong>Email:</strong> <a href="mailto:sarah@horizonbehavioralsolutions.com">sarah@horizonbehavioralsolutions.com</a></p>
-          <p class="small">We provide services for NDIS self-managed and plan-managed families, and offer fee-for-service for private payers. We prepare progress reports for NDIS reviews.</p>
+        <div class="alchemy" aria-hidden="true">
+          <!-- Alchemist‑style geometric SVG (original, not stock) -->
+          <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="g1" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#fff" stop-opacity="0.9"/>
+                <stop offset="20%" stop-color="#e9d5ff" stop-opacity="0.9"/>
+                <stop offset="55%" stop-color="#a78bfa" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.2"/>
+              </radialGradient>
+              <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="600" height="600" rx="24" fill="url(#g1)" opacity="0.08"/>
+            <g transform="translate(300,300)" stroke="#a78bfa" stroke-width="1.2" fill="none" filter="url(#glow)">
+              <circle r="220" opacity="0.4"/>
+              <circle r="180" opacity="0.5"/>
+              <circle r="120" opacity="0.8"/>
+              <polygon points="0,-180 156,90 -156,90" opacity="0.65"/>
+              <polygon points="0,-120 104,60 -104,60" opacity="0.8"/>
+              <line x1="-220" y1="0" x2="220" y2="0" opacity="0.35"/>
+              <line x1="0" y1="-220" x2="0" y2="220" opacity="0.35"/>
+              <circle r="6" fill="#a78bfa" stroke="none"/>
+              <g>
+                <path d="M0,-120 A120,120 0 0 1 104,60" opacity="0.9"/>
+                <path d="M104,60 A120,120 0 0 1 -104,60" opacity="0.9"/>
+                <path d="M-104,60 A120,120 0 0 1 0,-120" opacity="0.9"/>
+              </g>
+            </g>
+            <g transform="translate(480,110)">
+              <circle r="6" fill="#a78bfa"/>
+            </g>
+            <g transform="translate(100,480)">
+              <circle r="6" fill="#a78bfa"/>
+            </g>
+          </svg>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services" class="container section">
-      <h2>Our Services</h2>
-      <div class="services-grid">
-        <article class="service card">
-          <h3>Behavioral Parent Training (Online & In Person)</h3>
-          <p>As a caregiver, you are your child's greatest advocate. Our parent training is a partnership that customizes strategies to your family's needs, strengthening the bond while improving behaviour. We offer a 10-week capacity building program tailored to family goals and practical tools for everyday life.</p>
-        </article>
-
-        <article class="service card">
-          <h3>Consultancy Service Model</h3>
-          <p>Consultancy could entail everything from setting up your child’s initial program, to assisting with IEPs, school observations, and therapist training. Services include school observations/consultation, IEP meetings and goal preparation, assessments, and training independent therapists/support workers. Frequency is agreed between clinician and family.</p>
-        </article>
-
-        <article class="service card">
-          <h3>Early Intensive Behavioral Intervention Program</h3>
-          <p>Our core service is an individualized therapy program delivered in natural learning environments — home, childcare and school. Sessions are developed through consultation with parents and other providers, and through observation and assessment of the child. Children are supported to develop new skills in a nurturing, playful, strength-based environment that honours the child’s interests.</p>
-        </article>
+    <section id="features">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Capabilities</div>
+            <h2>Everything your phone team would do — at scale</h2>
+            <p class="sub">Purpose‑built for accountants: inbound, outbound, and follow‑ups handled end‑to‑end with audit trails and CRM updates.</p>
+          </div>
+          <a href="#contact" class="btn btn-ghost" data-hover>Request a tailored demo</a>
+        </div>
+        <div class="grid grid-3">
+          <div class="card reveal" data-tilt>
+            <div class="icon" aria-hidden="true"> 
+              <svg viewBox="0 0 24 24"><path d="M12 3l8 4v10l-8 4-8-4V7l8-4zm0 2.2L6 7.7v8.6l6 2.5 6-2.5V7.7L12 5.2z"/></svg>
+            </div>
+            <h3>Inbound auto‑answer</h3>
+            <p class="muted">Answer every call with a natural voice that understands tax & bookkeeping terms and routes/handles requests.</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <div class="icon" aria-hidden="true"> 
+              <svg viewBox="0 0 24 24"><path d="M3 12h13l-4-4 1.4-1.4L21.8 15l-8.4 8.4L12 22l4-4H3v-6z"/></svg>
+            </div>
+            <h3>Outbound reminders</h3>
+            <p class="muted">Invoice chasing, document requests, and deadline nudges. Smart retries, time‑zone aware.</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <div class="icon" aria-hidden="true"> 
+              <svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 10h10v10H4zM16 10h4v10h-4z"/></svg>
+            </div>
+            <h3>Lead qualification</h3>
+            <p class="muted">Score callers, capture intent & budget, and push enriched leads into your CRM with transcripts.</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <div class="icon" aria-hidden="true"> 
+              <svg viewBox="0 0 24 24"><path d="M7 2h10v4H7zM3 8h18v14H3zM8 12h8v2H8zM8 16h5v2H8z"/></svg>
+            </div>
+            <h3>Booking & rescheduling</h3>
+            <p class="muted">Connect Google/Outlook Calendars & Calendly. The agent books, confirms, and reschedules automatically.</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <div class="icon" aria-hidden="true"> 
+              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1 5h2v6h-2V7zm0 8h2v2h-2v-2z"/></svg>
+            </div>
+            <h3>Compliance & security</h3>
+            <p class="muted">Role‑based access, encrypted storage in transit & at rest, detailed logs. SOC 2‑friendly practices.</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <div class="icon" aria-hidden="true"> 
+              <svg viewBox="0 0 24 24"><path d="M12 3l9 6-9 6-9-6 9-6zm0 14l9-6v8H3v-8l9 6z"/></svg>
+            </div>
+            <h3>Multi‑language</h3>
+            <p class="muted">Serve clients in 30+ languages with accents tuned for your market.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- PARENT TRAINING DETAILS -->
-    <section id="parent-training" class="container section">
-      <h2>Why Behavioral Parent Training is Important</h2>
-      <p>As a caregiver, you naturally spend the most time with your child, making you their greatest advocate. We need you, their greatest advocate, on their care team. Customized to fit the needs of your family, parent training is more than a program; it’s a partnership aimed at unlocking your child’s potential. Utilizing evidence-based strategies in your everyday life not only brings about behavioral improvements in your child but also strengthens the emotional bond between you and your child.</p>
-
-      <h3>What is HBS Parent Training Program?</h3>
-      <p>We offer a 10-week capacity building parent training program that empowers parents with the tools and strategies they need to transform their lives and create meaningful, lasting change in their child’s life. The goal of the 10-weeks Behavioral Parent training Program is to provide support that is individualized to the goals of the family and helps the child progress in multiple developmental domains – social, pre-academic, behavioral, language.</p>
-
-      <h3>What to Expect in the Sessions</h3>
-      <ul class="expect-list">
-        <li>Why the child engages in the challenging behaviour — identifying the “WHY”.</li>
-        <li>Controlling emotions vs effectively managing behavior.</li>
-        <li>How to predict and prevent challenging behaviors.</li>
-        <li>How to respond to challenging behaviors.</li>
-        <li>How to improve or develop effective communication or language using Functional Communication Training.</li>
-        <li>How to teach new skills using evidence-based techniques e.g. Toilet training, Daily living skills, Social skills etc.</li>
-        <li>How to maintain positive change over time.</li>
-      </ul>
+    <section id="how">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Deployment</div>
+            <h2>Go live in 3 steps</h2>
+            <p class="sub">We launch your agent with a tested accounting script pack and integrate your stack in days, not months.</p>
+          </div>
+        </div>
+        <div class="grid grid-3 steps">
+          <div class="step reveal">
+            <div>
+              <h3>Connect your number & calendar</h3>
+              <p class="muted">Port or assign a number. Link Google/Outlook calendars for instant scheduling.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div>
+              <h3>Integrate your tools</h3>
+              <p class="muted">QuickBooks, Xero, Stripe, HubSpot, Pipedrive, Slack, Zapier — we plug into your flow.</p>
+            </div>
+          </div>
+          <div class="step reveal">
+            <div>
+              <h3>Tune the voice & guardrails</h3>
+              <p class="muted">Pick tone & persona, load FAQs, set actions, and launch with QA and monitoring.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- CONSULTANCY DETAILS -->
-    <section id="consultancy" class="container section">
-      <h2>Consultancy — Practical, Individualized Support</h2>
-      <p>Consultancy can include setting up your child’s initial program, assisting with IEPs, supporting school observations, assessments and training independent therapists/support staff. The frequency of consultation depends on a mutually agreed number of hours between clinician and the family.</p>
+    <section id="integrations">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Integrations</div>
+            <h2>Fits your accounting stack</h2>
+            <p class="sub">Out‑of‑the‑box connectors and webhooks. Developer‑friendly REST APIs.</p>
+          </div>
+        </div>
+        <div class="grid grid-4">
+          <!-- Minimal, original SVG "logos" in brand style -->
+          <div class="card reveal" data-tilt>
+            <h3>QuickBooks</h3>
+            <p class="muted">Create customer records, log calls, sync invoices.</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <h3>Xero</h3>
+            <p class="muted">Invoice lookups, status updates, payment links.</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <h3>Stripe</h3>
+            <p class="muted">Collect payments over secure links sent mid‑call.</p>
+          </div>
+          <div class="card reveal" data-tilt>
+            <h3>Calendly</h3>
+            <p class="muted">Frictionless booking with automatic confirmations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <h3>How to access our services</h3>
-      <p>If you have a current NDIS plan, we can provide services to NDIS self-managed and plan-managed families, including writing progress reports for NDIS reviews. If you don't have NDIS funding, we offer “Fee for Service” arrangements for private payers.</p>
+    <section id="pricing">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Pricing</div>
+            <h2>Simple plan, ROI‑first</h2>
+            <p class="sub">Start with a white‑glove deployment. Scale usage as you grow.</p>
+          </div>
+        </div>
+        <div class="pricing">
+          <div class="price-card reveal">
+            <div class="badge" style="margin-bottom:10px">Most popular</div>
+            <h3 style="margin:0">Done‑For‑You Implementation</h3>
+            <div class="price-tag">From $5,000</div>
+            <ul class="list">
+              <li><span class="check">✅</span> Strategy workshop & script pack (accounting‑specific)</li>
+              <li><span class="check">✅</span> Custom voice persona & guardrails</li>
+              <li><span class="check">✅</span> Integration setup (CRM, calendar, billing)</li>
+              <li><span class="check">✅</span> Call flows: inbound, outbound, collections</li>
+              <li><span class="check">✅</span> Dashboard & analytics</li>
+              <li><span class="check">✅</span> Team training & go‑live support</li>
+            </ul>
+            <div class="muted">Usage billed separately at provider rates.</div>
+            <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+              <a href="#contact" class="btn btn-primary" data-hover>Get a Quote</a>
+              <a href="#faq" class="btn btn-ghost" data-hover>Questions?</a>
+            </div>
+          </div>
+          <div class="price-card reveal">
+            <h3 style="margin:0">Monthly Support</h3>
+            <div class="price-tag">Custom</div>
+            <ul class="list">
+              <li><span class="check">✅</span> SLA & monitoring</li>
+              <li><span class="check">✅</span> Ongoing optimization</li>
+              <li><span class="check">✅</span> New flows & integrations</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost" data-hover>Talk to Sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <h3>To discuss further</h3>
-      <ol>
-        <li>Schedule a free initial telephone consultation.</li>
-        <li>Know what services you need.</li>
-        <li>Find out about the cost.</li>
-      </ol>
+    <section id="testimonials">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Results</div>
+            <h2>Firms modernizing the client phone experience</h2>
+            <p class="sub">Examples from recent deployments (industries like tax prep, bookkeeping, CFO services).</p>
+          </div>
+          <div class="slider-nav">
+            <button class="btn btn-ghost" id="prev" aria-label="Previous">◄</button>
+            <button class="btn btn-ghost" id="next" aria-label="Next">►</button>
+          </div>
+        </div>
+        <div class="slider">
+          <div class="slides" id="slides">
+            <div class="slide">
+              <div class="card">
+                <h3>+37% more booked consults</h3>
+                <p class="muted">Tax advisory firm captured missed calls after hours; AI booked directly into partners' calendars.</p>
+                <p class="muted">“We no longer miss growth opportunities.” — S.B., Managing Partner</p>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="card">
+                <h3>Faster collections</h3>
+                <p class="muted">Automated invoice reminders reduced average days outstanding by 8 days in 60 days.</p>
+                <p class="muted">“Polite, consistent, and effective.” — L.R., AR Lead</p>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="card">
+                <h3>Happier clients</h3>
+                <p class="muted">Call pickup < 1s with accurate answers and professional tone, in English & Spanish.</p>
+                <p class="muted">“Clients love the instant response.” — J.K., COO</p>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="card">
+                <h3>Scaled support without hiring</h3>
+                <p class="muted">Seasonal spikes handled automatically; the team focused on higher‑value work.</p>
+                <p class="muted">“It paid for itself in month one.” — D.M., Partner</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">FAQ</div>
+            <h2>Good to know</h2>
+          </div>
+        </div>
+        <div class="grid grid-3">
+          <div class="card reveal"><h3>Can it handle compliance?</h3><p class="muted">We follow industry best practices: encrypted data in transit & at rest, access controls, and detailed audit logs. Ask about our security overview.</p></div>
+          <div class="card reveal"><h3>How accurate is it with tax terms?</h3><p class="muted">Models are fine‑tuned with accounting terminology and your firm’s FAQs. We also add guardrails to avoid hallucinations.</p></div>
+          <div class="card reveal"><h3>What about pricing?</h3><p class="muted">Implementation from $5k covers strategy, setup, voice tuning, and QA. Ongoing usage depends on minutes and provider rates.</p></div>
+          <div class="card reveal"><h3>Can it book meetings?</h3><p class="muted">Yes — we connect your calendars and booking tools so the agent schedules, confirms, and reschedules.</p></div>
+          <div class="card reveal"><h3>Does it replace my team?</h3><p class="muted">It augments your team by handling repetitive calls and after‑hours coverage. Your people focus on advisory.</p></div>
+          <div class="card reveal"><h3>How fast to go live?</h3><p class="muted">Typically 7–14 days from kickoff, depending on integrations and call flows.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Talk to Sales</div>
+            <h2>Book a demo</h2>
+            <p class="sub">Tell us about your firm and we’ll show you a tailored workflow.</p>
+          </div>
+        </div>
+        <div class="grid" style="grid-template-columns:1.2fr .8fr;gap:18px">
+          <div class="card reveal">
+            <form id="contactForm" data-endpoint="" novalidate>
+              <div class="form-row">
+                <div>
+                  <label for="name" class="muted">Full name</label>
+                  <input id="name" name="name" placeholder="Jane Doe" required />
+                </div>
+                <div>
+                  <label for="email" class="muted">Work email</label>
+                  <input id="email" name="email" type="email" placeholder="jane@firm.com" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div>
+                  <label for="company" class="muted">Firm name</label>
+                  <input id="company" name="company" placeholder="Acme Tax LLP" required />
+                </div>
+                <div>
+                  <label for="size" class="muted">Team size</label>
+                  <select id="size" name="size" required>
+                    <option value="" disabled selected>Select…</option>
+                    <option>1–5</option>
+                    <option>6–15</option>
+                    <option>16–30</option>
+                    <option>31–75</option>
+                    <option>75+</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label for="message" class="muted">What are you looking to automate?</label>
+                <textarea id="message" name="message" placeholder="Inbound, collections, lead qualification, etc." required></textarea>
+              </div>
+              <input type="text" name="_honeypot" id="honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+              <div class="form-foot">
+                <div class="hint" id="formHint">We’ll reply within 1 business day.</div>
+                <button type="submit" class="btn btn-primary" id="submitBtn" data-hover>
+                  <span id="btnText">Send message</span>
+                  <svg id="spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none"><circle cx="12" cy="12" r="8" stroke="#fff" stroke-width="2" opacity=".35"/><path d="M20 12a8 8 0 0 1-8 8" stroke="#fff" stroke-width="2"/></svg>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card reveal">
+            <h3>What to expect</h3>
+            <ul class="list">
+              <li><span class="check">✅</span> 30‑minute discovery call</li>
+              <li><span class="check">✅</span> Demo of accounting call flows</li>
+              <li><span class="check">✅</span> Clear next steps & quote</li>
+            </ul>
+            <div class="muted">Prefer email? <a href="mailto:hello@ledgercall.ai" style="color:#fff">hello@ledgercall.ai</a></div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="brand-mini">
-        <div class="logo small">H</div>
+  <footer>
+    <div class="container foot">
+      <div class="foot-grid">
         <div>
-          <strong>Horizon Behavioral Solutions</strong>
-          <div class="small">Outcome-focused • Family-led</div>
+          <div class="logo" style="margin-bottom:8px">
+            <span class="logo-mark" aria-hidden="true"></span>
+            <b>LedgerCall AI</b>
+          </div>
+          <p>AI voice agents for accountants. Book more consults, delight clients, and speed up collections.</p>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#features">Features</a><br/>
+          <a href="#pricing">Pricing</a><br/>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="#">Terms</a><br/>
+          <a href="#">Privacy</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="mailto:hello@ledgercall.ai">hello@ledgercall.ai</a><br/>
+          <span class="muted">© <span id="year"></span> LedgerCall AI</span>
         </div>
       </div>
-
-      <div class="footer-contact">
-        <div><strong>Call:</strong> +61 421 085 629</div>
-        <div><strong>Email:</strong> <a href="mailto:sarah@horizonbehavioralsolutions.com">sarah@horizonbehavioralsolutions.com</a></div>
-      </div>
-
-      <div class="copyright">© <span id="year"></span> Horizon Behavioral Solutions — All rights reserved</div>
     </div>
   </footer>
 
-  <!-- TOAST -->
-  <div id="toast" class="toast">Message sent — we'll be in touch shortly.</div>
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
 
-  <!-- SCRIPTS -->
   <script>
-    // --- Small utilities & UI behavior ---
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile menu toggle
+    // Mobile nav
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileMenu = document.getElementById('mobileMenu');
-    mobileToggle.addEventListener('click', () => {
-      const open = mobileMenu.style.display === 'block';
-      mobileMenu.style.display = open ? 'none' : 'block';
-      mobileToggle.setAttribute('aria-expanded', String(!open));
+    mobileToggle?.addEventListener('click', ()=>{
+      const isHidden = mobileMenu.hasAttribute('hidden');
+      mobileMenu.toggleAttribute('hidden');
+      mobileToggle.setAttribute('aria-expanded', String(isHidden));
     });
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const href = a.getAttribute('href');
-        if (href.length > 1) {
-          e.preventDefault();
-          const el = document.querySelector(href);
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          if (window.innerWidth < 800) mobileMenu.style.display = 'none';
-        }
-      });
+    // Cursor ring
+    const cursor = document.getElementById('cursor');
+    const dot = document.getElementById('cursorDot');
+    window.addEventListener('mousemove', (e)=>{
+      const {clientX:x, clientY:y} = e;
+      cursor.style.transform = `translate(${x}px, ${y}px)`;
+      dot.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    document.querySelectorAll('[data-hover], .btn, .card').forEach(el=>{
+      el.addEventListener('mouseenter', ()=> cursor.style.borderColor = 'rgba(255,255,255,.7)');
+      el.addEventListener('mouseleave', ()=> cursor.style.borderColor = 'rgba(167,139,250,.45)');
+      el.addEventListener('mousedown', ()=>{ cursor.style.width = '48px'; cursor.style.height = '48px'; });
+      el.addEventListener('mouseup', ()=>{ cursor.style.width = '36px'; cursor.style.height = '36px'; });
     });
 
-    // set min date/time for datetime-local to now + 30min
-    function setMinDateTime() {
-      const dt = document.getElementById('datetime');
-      if (!dt) return;
-      const now = new Date(Date.now() + 30 * 60 * 1000);
-      const tzOffset = now.getTimezoneOffset() * 60000;
-      const localISO = new Date(now - tzOffset).toISOString().slice(0,16);
-      dt.min = localISO;
-    }
-    setMinDateTime();
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
 
-    // --- Contact form handling: EmailJS (default) with fallback to server POST ---
+    // VanillaTilt on cards
+    VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{ max:6, speed:500, glare:true, 'max-glare':.2 });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Progress bar
+    const progress = document.getElementById('progress');
+    const onScroll = ()=>{
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = Math.min(1, scrollTop / docHeight);
+      progress.style.width = (pct * 100) + '%';
+    };
+    window.addEventListener('scroll', onScroll); onScroll();
+
+    // Simple slider
+    const slides = document.getElementById('slides');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    let index = 0;
+    const updateSlider = ()=>{
+      const w = document.querySelector('.slide').offsetWidth + 16; // card width + gap
+      slides.style.transform = `translateX(${-index * w}px)`;
+      const maxIndex = Math.max(0, slides.children.length - Math.round(slides.parentElement.offsetWidth / w));
+      index = Math.max(0, Math.min(index, maxIndex));
+    };
+    next?.addEventListener('click', ()=>{ index++; updateSlider(); });
+    prev?.addEventListener('click', ()=>{ index--; updateSlider(); });
+    window.addEventListener('resize', updateSlider);
+    updateSlider();
+
+    // Contact form
     const form = document.getElementById('contactForm');
-    const toast = document.getElementById('toast');
-    const statusEl = document.getElementById('formStatus');
+    const hint = document.getElementById('formHint');
+    const btn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('spinner');
+    const btnText = document.getElementById('btnText');
 
-    // CONFIG: replace these placeholders
-    const EMAILJS_USER_ID = 'EMAILJS_USER_ID';     // <-- replace with your EmailJS user id (public key)
-    const EMAILJS_SERVICE_ID = 'EMAILJS_SERVICE_ID'; // <-- replace with your EmailJS service id
-    const EMAILJS_TEMPLATE_ID = 'EMAILJS_TEMPLATE_ID'; // <-- replace with your EmailJS template id
-
-    const USE_EMAILJS = true; // set to false to skip EmailJS and POST to server instead
-    const SERVER_POST_URL = '/api/contact'; // change to full URL if server hosted elsewhere
-    const FORMSPREE_ENDPOINT = ''; // optionally set to https://formspree.io/f/xxxxx
-
-    // Helper: show success
-    function showSuccess(msg) {
-      statusEl.style.color = '#00c2a8';
-      statusEl.textContent = msg;
-      toast.style.display = 'block';
-      setTimeout(() => toast.style.display = 'none', 4000);
-      form.reset();
-      setMinDateTime();
-    }
-
-    // POST to server fallback
-    async function postToServer(data) {
-      try {
-        const res = await fetch(SERVER_POST_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        if (res.ok) {
-          showSuccess('Thanks! Your request has been sent. We will contact you soon.');
-        } else {
-          const text = await res.text();
-          statusEl.textContent = 'Failed to send: ' + text;
-        }
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = 'Unable to send form (server). Try emailing sarah@horizonbehavioralsolutions.com';
-      }
-    }
-
-    // Use Formspree alternative (uncomment if you want to use Formspree directly)
-    async function postToFormspree(formEl) {
-      const endpoint = FORMSPREE_ENDPOINT; // set this to your formspree url
-      if (!endpoint) {
-        statusEl.textContent = 'Formspree endpoint not set.';
-        return;
-      }
-      const fd = new FormData(formEl);
-      try {
-        const res = await fetch(endpoint, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' }});
-        if (res.ok) {
-          showSuccess('Thanks! Your request has been sent. We will contact you soon.');
-        } else {
-          statusEl.textContent = 'Formspree failed to send.';
-        }
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = 'Formspree error.';
-      }
-    }
-
-    // Main submit
-    form.addEventListener('submit', async (e) => {
+    form?.addEventListener('submit', async (e)=>{
       e.preventDefault();
-      statusEl.style.color = '';
-      statusEl.textContent = 'Sending...';
-
-      const data = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        phone: form.phone.value.trim(),
-        service: form.service.value,
-        datetime: form.datetime.value,
-        message: form.message.value.trim()
-      };
-
-      // If you want to use Formspree, call postToFormspree(form) here and return.
-
-      if (USE_EMAILJS) {
-        // dynamically load EmailJS if needed
-        try {
-          if (!window.emailjs) {
-            await new Promise((resolve, reject) => {
-              const s = document.createElement('script');
-              s.src = 'https://cdn.emailjs.com/sdk/3.2.0/email.min.js';
-              s.onload = resolve;
-              s.onerror = reject;
-              document.head.appendChild(s);
-            });
-          }
-          // initialize - replace placeholder above with your user id
-          if (window.emailjs && EMAILJS_USER_ID && EMAILJS_USER_ID !== 'EMAILJS_USER_ID') {
-            window.emailjs.init(EMAILJS_USER_ID);
-          } else {
-            console.warn('EmailJS not initialized: set EMAILJS_USER_ID in script.');
-          }
-
-          // prepare template params (ensure your template uses these fields)
-          const templateParams = {
-            from_name: data.name,
-            from_email: data.email,
-            phone: data.phone,
-            service_requested: data.service,
-            preferred_datetime: data.datetime,
-            message: data.message,
-            site: 'Horizon Behavioral Solutions'
-          };
-
-          if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || EMAILJS_SERVICE_ID === 'EMAILJS_SERVICE_ID') {
-            // EmailJS IDs not set -> fallback
-            throw new Error('EmailJS IDs not set');
-          }
-
-          const res = await window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-          console.log('EmailJS response', res);
-          showSuccess('Thanks! Your request has been sent. We will contact you soon.');
-        } catch (err) {
-          console.warn('EmailJS failed, falling back to server POST.', err);
-          // fallback to server
-          await postToServer(data);
+      if(document.getElementById('honeypot').value) return; // spam honey
+      const endpoint = form.dataset.endpoint?.trim();
+      const payload = Object.fromEntries(new FormData(form).entries());
+      btn.disabled = true; spinner.style.display='inline'; btnText.textContent='Sending…';
+      try{
+        if(endpoint){
+          const res = await fetch(endpoint, {method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form)});
+          if(!res.ok) throw new Error('Network error');
+          hint.textContent = 'Thanks! We\'ll be in touch shortly.'; hint.className='hint success'; form.reset();
+        } else {
+          // Local demo success fallback
+          localStorage.setItem('lead-'+Date.now(), JSON.stringify(payload));
+          hint.textContent = 'Message sent (demo). Add your Formspree endpoint to make it live.'; hint.className='hint success'; form.reset();
         }
-      } else {
-        // direct server POST
-        await postToServer(data);
+      }catch(err){
+        hint.textContent = 'Something went wrong. Please email hello@ledgercall.ai';
+        hint.className='hint error';
+      }finally{
+        btn.disabled = false; spinner.style.display='none'; btnText.textContent='Send message';
       }
     });
   </script>
